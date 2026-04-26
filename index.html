@@ -1,1 +1,74 @@
-https://script.google.com/macros/s/AKfycbx3Yc-4IIRyPeILtuBtZcykN1kvnwfsApFYmj3GgDlWnN84ThEJmnJFsPe8EjNiOw2t/exec
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS PROP | คอนโดชลบุรี บางแสน ศรีราชา</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Prompt', sans-serif; }</style>
+</head>
+<body class="bg-slate-50">
+    <nav class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold italic">PS PROP</h1>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-blue-300">หน้าแรก</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-blue-800 text-white py-12 text-center">
+        <h2 class="text-3xl font-bold mb-2">ปล่อยเช่าคอนโด ชลบุรี บางแสน ศรีราชา</h2>
+        <p class="opacity-80">จัดการห้องพักง่ายๆ ผ่าน Google Sheets</p>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <div id="loading" class="text-center py-10 text-gray-500 text-xl">กำลังดึงข้อมูลห้องว่างล่าสุด...</div>
+        <div id="app" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </main>
+
+    <script>
+        // ลิงก์ API ของคุณไอซ์
+        const API_URL = "https://script.google.com/macros/s/AKfycbx3Yc-4IIRyPeILtuBtZcykN1kvnwfsApFYmj3GgDlWnN84ThEJmnJFsPe8EjNiOw2t/exec";
+
+        async function loadCondos() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                render(data);
+                document.getElementById('loading').classList.add('hidden');
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('loading').innerText = "รออัปเดตข้อมูลจากระบบหลังบ้าน...";
+            }
+        }
+
+        function render(items) {
+            const container = document.getElementById('app');
+            if (items.length === 0) {
+                document.getElementById('loading').innerText = "ยังไม่มีรายการห้องว่างในขณะนี้";
+                return;
+            }
+            container.innerHTML = items.map(item => `
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="${item.ImageURL}" class="w-full h-52 object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=PS+PROP'">
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded">${item.ID || 'CONDO'}</span>
+                            <span class="text-xs font-bold ${item.Status === 'ใช้งานอยู่' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'} px-2 py-1 rounded-full">${item.Status || 'ว่าง'}</span>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-1">${item.Title}</h3>
+                        <p class="text-gray-500 text-sm mb-4">📍 ${item.Location}</p>
+                        <div class="flex justify-between items-center border-t pt-4">
+                            <span class="text-xl font-bold text-blue-600">฿${Number(item.Price).toLocaleString()} <small class="text-gray-400 text-xs">/เดือน</small></span>
+                            <span class="text-sm text-gray-500">${item.Agent || 'PS PROP'}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        loadCondos();
+    </script>
+</body>
+</html>
