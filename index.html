@@ -18,7 +18,10 @@
         .modal-content { transition: transform 0.3s ease; }
         .modal.active { opacity: 1; visibility: visible; }
         .modal.active .modal-content { transform: scale(1); }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .thumb-active { border-color: #1e3a8a; opacity: 1 !important; border-width: 2px; }
+        .gallery-thumbs::-webkit-scrollbar { height: 4px; }
+        .gallery-thumbs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -31,147 +34,144 @@
                     <h1 class="text-2xl font-bold text-gray-900 tracking-wider">PS<span class="text-blue-800">PROP</span></h1>
                 </a>
                 <div class="hidden md:flex space-x-6 items-center">
-                    <a href="#property-section" class="text-gray-600 hover:text-blue-800 font-medium">รายการอสังหาฯ</a>
-                    <a href="#footer" class="text-gray-600 hover:text-blue-800 font-medium">ติดต่อทีมงาน</a>
-                    <a href="#footer" class="bg-blue-800 text-white px-6 py-2.5 rounded-full font-medium hover:bg-blue-900 transition shadow">ฝากขาย/ปล่อยเช่า</a>
+                    <a href="#property-section" class="text-gray-600 hover:text-blue-800 font-medium transition text-sm">รายการอสังหาฯ</a>
+                    <a href="#footer" class="text-gray-600 hover:text-blue-800 font-medium transition text-sm">ติดต่อเรา</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero-gradient text-white py-20 px-4">
+    <header class="hero-gradient text-white py-16 px-4">
         <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-md">ค้นหาพื้นที่ความสุข ในโซนชลบุรี</h2>
-            <p class="text-lg text-blue-100 mb-10">ระบบคัดกรองอสังหาฯ ที่แม่นยำ พร้อมข้อมูลตรงจากผู้ดูแล</p>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 drop-shadow-md">ค้นหาพื้นที่ความสุข ในโซนชลบุรี</h2>
+            <p class="text-lg text-blue-100 mb-10 max-w-2xl mx-auto text-sm md:text-base">ระบบคัดกรองอสังหาฯ ที่แม่นยำ ติดต่อเจ้าของห้องได้โดยตรง</p>
             
-            <div class="bg-white/10 backdrop-blur-md p-4 rounded-3xl shadow-lg border border-white/20 inline-block max-w-full overflow-x-auto">
-                <div class="flex flex-nowrap md:flex-wrap justify-center gap-2 min-w-max md:min-w-0">
-                    <button onclick="applyFilter('ทั้งหมด', 'ทั้งหมด')" class="filter-btn active px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🌟 ทั้งหมด</button>
-                    <button onclick="applyFilter('คอนโด', 'บางแสน')" class="filter-btn px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🏢 คอนโด บางแสน</button>
-                    <button onclick="applyFilter('คอนโด', 'ศรีราชา')" class="filter-btn px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🏢 คอนโด ศรีราชา</button>
-                    <button onclick="applyFilter('บ้าน', 'บางแสน')" class="filter-btn px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🏡 บ้าน บางแสน</button>
-                    <button onclick="applyFilter('บ้าน', 'ศรีราชา')" class="filter-btn px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🏡 บ้าน ศรีราชา</button>
-                    <button onclick="applyFilter('ที่ดิน', 'ทั้งหมด')" class="filter-btn px-5 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-sm md:text-base hover:bg-gray-50 transition whitespace-nowrap">🗺️ ที่ดินชลบุรี</button>
+            <div class="bg-white/10 backdrop-blur-md p-3 rounded-3xl shadow-lg border border-white/20 inline-block max-w-full overflow-x-auto gallery-thumbs">
+                <div class="flex justify-center gap-2 min-w-max pb-1">
+                    <button onclick="applyFilter('ทั้งหมด', 'ทั้งหมด')" class="filter-btn active px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">ทั้งหมด</button>
+                    <button onclick="applyFilter('คอนโด', 'บางแสน')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">🏢 คอนโด บางแสน</button>
+                    <button onclick="applyFilter('คอนโด', 'ศรีราชา')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">🏢 คอนโด ศรีราชา</button>
+                    <button onclick="applyFilter('บ้าน', 'บางแสน')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">🏡 บ้าน บางแสน</button>
+                    <button onclick="applyFilter('บ้าน', 'ศรีราชา')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">🏡 บ้าน ศรีราชา</button>
+                    <button onclick="applyFilter('ที่ดิน', 'ทั้งหมด')" class="filter-btn px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium text-xs md:text-sm hover:bg-gray-50 transition whitespace-nowrap">🗺️ ที่ดินชลบุรี</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <main id="property-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="flex justify-between items-center mb-8">
-            <h3 class="text-2xl font-bold text-gray-800" id="section-title">รายการทรัพย์ทั้งหมด</h3>
-            <span id="result-count" class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm font-medium">กำลังโหลด...</span>
+    <main id="property-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800" id="section-title">รายการทรัพย์ทั้งหมด</h3>
+            <span id="result-count" class="bg-blue-100 text-blue-800 py-1.5 px-4 rounded-full text-xs font-semibold">กำลังโหลด...</span>
         </div>
 
-        <div id="loading" class="flex flex-col items-center justify-center py-20">
-            <i class="fa-solid fa-circle-notch fa-spin text-5xl text-blue-800 mb-4"></i>
-            <p class="text-gray-500 font-medium">กำลังเชื่อมต่อฐานข้อมูล...</p>
+        <div id="loading" class="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-gray-100 shadow-sm">
+            <i class="fa-solid fa-circle-notch fa-spin text-5xl text-blue-800 mb-4 opacity-50"></i>
+            <p class="text-gray-500 font-medium">กำลังเชื่อมต่อข้อมูล...</p>
         </div>
         
         <div id="app" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </main>
 
-    <footer id="footer" class="bg-gray-900 text-white py-12 text-center border-t-4 border-blue-800">
+    <footer id="footer" class="bg-gray-900 text-white py-12 text-center border-t-4 border-blue-800 mt-16">
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="text-2xl font-bold mb-4">PS PROP Real Estate</h3>
-            <p class="text-gray-400 mb-6">ผู้เชี่ยวชาญด้านการจัดหาที่พักอาศัย คอนโด บ้าน และที่ดิน ในโซนชลบุรี บางแสน ศรีราชา</p>
+            <p class="text-gray-400 mb-6 text-sm">รวมที่พักอาศัย คอนโด บ้าน และที่ดิน ทำเลดี ในโซนชลบุรี บางแสน ศรีราชา</p>
             <div class="flex justify-center space-x-4 mb-8">
                 <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 transition"><i class="fa-brands fa-line"></i></a>
             </div>
-            <p class="text-gray-500 text-sm">&copy; 2026 PS PROP. All rights reserved.</p>
+            <p class="text-gray-500 text-xs tracking-wide">&copy; 2026 PS PROP. All rights reserved.</p>
         </div>
     </footer>
 
-    <div id="property-modal" class="modal fixed inset-0 z-50 opacity-0 invisible flex items-center justify-center bg-gray-900/80 backdrop-blur-sm p-4">
-        <div class="modal-content bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto transform scale-95 relative flex flex-col md:flex-row">
+    <div id="property-modal" class="modal fixed inset-0 z-50 opacity-0 invisible flex items-center justify-center bg-gray-950/90 backdrop-blur-sm p-3 md:p-6 transition-all duration-300">
+        <div class="modal-content bg-white rounded-3xl shadow-2xl w-full max-w-5xl max-h-[92vh] overflow-y-auto transform scale-95 relative flex flex-col md:flex-row transition-all duration-300">
             
-            <button onclick="closeModal()" class="absolute top-4 right-4 bg-white text-gray-800 hover:text-red-500 w-8 h-8 rounded-full shadow-md flex items-center justify-center z-10 transition">
+            <button onclick="closeModal()" class="absolute top-4 right-4 bg-gray-900/60 text-white hover:bg-red-500 w-9 h-9 rounded-full shadow-lg flex items-center justify-center z-10 transition">
                 <i class="fa-solid fa-times text-lg"></i>
             </button>
 
-            <div class="w-full md:w-1/2 h-64 md:h-auto">
-                <img id="modal-image" src="" alt="Property Image" class="w-full h-full object-cover rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+            <div class="w-full md:w-1/2 p-2 flex flex-col h-[50vh] md:h-auto">
+                <div class="flex-grow rounded-2xl overflow-hidden bg-gray-100 relative group cursor-zoom-in" onclick="zoomImage()">
+                    <img id="modal-image-main" src="" alt="Property Image" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute bottom-3 right-3 bg-black/60 text-white px-3 py-1.5 rounded-lg text-xs font-medium shadow backdrop-blur-sm">
+                        <i class="fa-solid fa-expand mr-1.5"></i> กดเพื่อขยายภาพ
+                    </div>
+                </div>
+                <div id="gallery-thumbs" class="gallery-thumbs flex gap-2 pt-2 overflow-x-auto pb-1 mt-1">
+                    </div>
             </div>
 
             <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col">
                 <div class="flex justify-between items-start mb-2">
-                    <span id="modal-id" class="text-xs font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-md">ID: -</span>
+                    <span id="modal-id" class="text-xs font-bold bg-blue-100 text-blue-800 px-3 py-1 rounded-lg">ID: -</span>
                     <span id="modal-status" class="text-xs font-bold px-3 py-1 rounded-full text-white">สถานะ</span>
                 </div>
                 
-                <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-2">ชื่อทรัพย์</h2>
+                <h2 id="modal-title" class="text-xl md:text-2xl font-bold text-gray-900 mb-2 leading-snug">ชื่อทรัพย์</h2>
                 <p class="text-gray-500 text-sm mb-6"><i class="fa-solid fa-location-dot text-red-500 mr-2"></i><span id="modal-location">สถานที่</span></p>
                 
-                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 mb-6">
-                    <p class="text-sm text-gray-500 mb-1">ราคาเช่า / เดือน</p>
-                    <p id="modal-price" class="text-3xl font-bold text-blue-800">฿0</p>
-                </div>
-
-                <div class="flex-grow">
-                    <h4 class="font-semibold text-gray-800 mb-2">รายละเอียดเพิ่มเติม:</h4>
-                    <p id="modal-desc" class="text-gray-600 text-sm leading-relaxed mb-6 whitespace-pre-line">ไม่มีข้อมูลอธิบายเพิ่มเติม</p>
-                </div>
-
-                <div class="border-t border-gray-200 pt-6 mt-auto">
-                    <p class="text-sm text-gray-500 mb-3">ผู้ดูแลทรัพย์:</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-blue-800 text-white flex items-center justify-center text-lg"><i class="fa-regular fa-user"></i></div>
-                            <span id="modal-agent" class="font-bold text-gray-800">ทีมงาน</span>
-                        </div>
-                        <a id="modal-contact-btn" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-xl font-medium transition shadow-md flex items-center gap-2">
-                            <i class="fa-brands fa-line text-xl"></i> ทักแชท
-                        </a>
+                <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 mb-6 flex items-end justify-between gap-4">
+                    <div>
+                        <p class="text-xs text-gray-500 mb-1">ราคาเช่า / เดือน</p>
+                        <p id="modal-price" class="text-3xl font-bold text-blue-800">฿0</p>
                     </div>
+                    <span class="text-xs font-normal text-gray-400">*สัญญาเช่ารายปี</span>
+                </div>
+
+                <div class="flex-grow overflow-y-auto mb-6 pr-2 gallery-thumbs">
+                    <h4 class="font-semibold text-gray-800 mb-2.5 text-sm">รายละเอียดเพิ่มเติม:</h4>
+                    <p id="modal-desc" class="text-gray-600 text-sm leading-relaxed whitespace-pre-line">ไม่มีข้อมูลอธิบายเพิ่มเติม</p>
+                </div>
+
+                <div class="border-t border-gray-100 pt-6 mt-auto">
+                    <a id="modal-contact-btn" href="#" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white px-8 py-3.5 rounded-xl text-base font-semibold transition shadow-md flex items-center gap-2.5 justify-center">
+                        <i class="fa-brands fa-line text-2xl"></i> ติดต่อเจ้าของห้อง (ทักแชท)
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="image-zoom-overlay" class="fixed inset-0 z-50 invisible bg-gray-950/95 backdrop-blur-md flex items-center justify-center p-3 opacity-0 transition-all duration-300" onclick="closeZoom()">
+        <button class="absolute top-4 right-4 text-white hover:text-red-500 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center"><i class="fa-solid fa-times text-2xl"></i></button>
+        <img id="modal-zoom-image" src="" alt="Zoom Image" class="max-w-full max-h-[90vh] rounded-xl object-contain shadow-2xl transition-transform duration-300 transform scale-95 cursor-zoom-out">
+    </div>
+
     <script>
-        // 📌 ลิงก์ API เดิมของคุณ
         const API_URL = "https://script.google.com/macros/s/AKfycbx3Yc-4IIRyPeILtuBtZcykN1kvnwfsApFYmj3GgDlWnN84ThEJmnJFsPe8EjNiOw2t/exec";
         let allProperties = []; 
+        let currentModalImages = []; 
 
-        // ดึงข้อมูล
         async function fetchProperties() {
             try {
                 const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('API Response not OK');
                 const data = await response.json();
-                // คัดเอาเฉพาะแถวที่มี ID ป้องกันข้อมูลแถวว่าง
                 allProperties = data.filter(item => item.ID && item.ID.trim() !== ""); 
                 
-                // โหลดหน้าแรกแสดงทั้งหมด
                 applyFilter('ทั้งหมด', 'ทั้งหมด');
                 document.getElementById('loading').classList.add('hidden');
             } catch (error) {
                 console.error("Error:", error);
                 document.getElementById('loading').innerHTML = `
-                    <div class="bg-red-50 text-red-500 p-6 rounded-xl border border-red-200 text-center">
-                        <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
-                        <p class="font-medium">ไม่สามารถโหลดข้อมูลได้ กรุณาตรวจสอบลิงก์ API</p>
+                    <div class="bg-red-50 text-red-500 p-8 rounded-3xl border border-red-200 text-center shadow">
+                        <i class="fa-solid fa-triangle-exclamation text-4xl mb-3 block"></i>
+                        <p class="font-bold text-lg mb-1">ไม่สามารถโหลดข้อมูลได้ในขณะนี้</p>
+                        <p class="text-sm opacity-80">กรุณาลองรีเฟรชหน้าเว็บอีกครั้ง</p>
                     </div>`;
             }
         }
 
-        // ระบบตัวกรอง (Filter)
         function applyFilter(category, location) {
-            // อัปเดต UI ของปุ่ม
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active', 'bg-blue-800', 'text-white'));
             event.currentTarget?.classList.add('active', 'bg-blue-800', 'text-white');
 
             let filtered = allProperties;
+            if (category !== 'ทั้งหมด') filtered = filtered.filter(item => item.Category && item.Category.includes(category));
+            if (location !== 'ทั้งหมด') filtered = filtered.filter(item => item.Location && item.Location.includes(location));
 
-            // กรองตามหมวดหมู่และสถานที่
-            if (category !== 'ทั้งหมด') {
-                filtered = filtered.filter(item => item.Category && item.Category.includes(category));
-            }
-            if (location !== 'ทั้งหมด') {
-                filtered = filtered.filter(item => item.Location && item.Location.includes(location));
-            }
-
-            // เปลี่ยนหัวข้อ
             let titleText = category === 'ทั้งหมด' ? 'รายการทรัพย์ทั้งหมด' : `${category} ${location === 'ทั้งหมด' ? 'ชลบุรี' : location}`;
             document.getElementById('section-title').innerText = titleText;
             document.getElementById('result-count').innerText = `พบ ${filtered.length} รายการ`;
@@ -179,51 +179,49 @@
             renderCards(filtered);
         }
 
-        // เรนเดอร์การ์ด
         function renderCards(items) {
             const container = document.getElementById('app');
-            
             if (items.length === 0) {
                 container.innerHTML = `
-                    <div class="col-span-full flex flex-col items-center justify-center py-16 text-gray-400">
+                    <div class="col-span-full flex flex-col items-center justify-center py-20 text-gray-400 bg-white rounded-3xl border border-gray-100 shadow-sm mt-6">
                         <i class="fa-regular fa-folder-open text-6xl mb-4 text-gray-300"></i>
                         <h4 class="text-xl font-medium text-gray-500">ไม่พบรายการที่คุณค้นหา</h4>
-                        <p class="text-sm">ลองเปลี่ยนหมวดหมู่หรือทำเลที่ตั้งดูอีกครั้ง</p>
+                        <p class="text-sm">ลองเปลี่ยนหมวดหมู่หรือทำเลที่ตั้งดูอีกครั้งครับ</p>
                     </div>`;
                 return;
             }
 
             container.innerHTML = items.map((item, index) => {
-                // จัดการ Status ให้อ้างอิงจากฐานข้อมูล
                 const isAvailable = item.Status === 'ใช้งานอยู่';
                 const statusColor = isAvailable ? 'bg-green-500' : 'bg-red-500';
-                
+                const firstImage = (item.ImageURL && item.ImageURL.includes(',')) ? item.ImageURL.split(',')[0].trim() : (item.ImageURL || '');
+
                 return `
-                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full group">
-                    <div class="relative h-56 overflow-hidden bg-gray-100">
-                        <img src="${item.ImageURL}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=PS+PROP'">
-                        <div class="absolute top-3 left-3 bg-white/95 text-blue-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow">
+                <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full group">
+                    <div class="relative h-56 overflow-hidden bg-gray-50">
+                        <img src="${firstImage}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/e2e8f0/475569?text=PS+PROP'">
+                        <div class="absolute top-3 left-3 bg-white/95 text-blue-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow backdrop-blur-sm">
                             <i class="fa-solid fa-hashtag mr-1"></i>${item.ID}
                         </div>
-                        <div class="absolute top-3 right-3 text-xs font-bold px-3 py-1.5 rounded-lg shadow text-white ${statusColor}">
+                        <div class="absolute top-3 right-3 text-xs font-bold px-3 py-1.5 rounded-lg shadow text-white ${statusColor} backdrop-blur-sm">
                             ${item.Status || 'ใช้งานอยู่'}
                         </div>
                     </div>
                     
                     <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-1">${item.Title}</h3>
-                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-red-400 mr-2"></i>${item.Location}</p>
+                        <h3 class="text-base font-bold text-gray-800 mb-1.5 line-clamp-1">${item.Title}</h3>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-red-400 mr-1.5"></i>${item.Location}</p>
                         
-                        <div class="text-2xl font-bold text-blue-800 mb-4">
-                            ฿${Number(item.Price).toLocaleString()} <span class="text-sm font-normal text-gray-500">/ เดือน</span>
+                        <div class="text-2xl font-bold text-blue-800 mb-5">
+                            ฿${Number(item.Price).toLocaleString()} <span class="text-xs font-normal text-gray-400">/ เดือน</span>
                         </div>
                         
-                        <div class="mt-auto flex justify-between gap-2">
-                            <button onclick='openModal(${index})' class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-800 py-2.5 rounded-xl font-medium text-sm transition flex items-center justify-center gap-2">
+                        <div class="mt-auto flex justify-between gap-2.5">
+                            <button onclick='openModal(${index})' class="flex-grow bg-blue-50 hover:bg-blue-100 text-blue-800 py-3 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-2">
                                 <i class="fa-regular fa-eye"></i> ดูรายละเอียด
                             </button>
-                            <a href="${item.ContactLink || '#'}" target="_blank" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2.5 rounded-xl font-medium text-sm transition flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-line text-lg"></i> สนใจเช่า
+                            <a href="${item.ContactLink || '#'}" target="_blank" class="flex-grow bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold text-xs transition flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-line text-xl"></i> ทักแชท
                             </a>
                         </div>
                     </div>
@@ -231,51 +229,87 @@
             `}).join('');
         }
 
-        // ระบบ Modal (Pop-up)
+        function setModalMainImage(link, thumbEl) {
+            document.getElementById('modal-image-main').src = link;
+            document.querySelectorAll('#gallery-thumbs img').forEach(el => el.classList.remove('thumb-active'));
+            thumbEl.classList.add('thumb-active');
+        }
+
         function openModal(index) {
-            // ค้นหาข้อมูลจาก Array หน้าที่กำลังแสดงผล (ต้องเทียบกับข้อมูลที่ถูกกรอง)
-            // แต่เพื่อความง่าย เราดึงจาก allProperties หรือส่ง id ไปค้นหา
             const displayedTitle = document.querySelectorAll('#app h3')[index].innerText;
             const item = allProperties.find(p => p.Title === displayedTitle);
-
             if(!item) return;
+
+            const thumbsContainer = document.getElementById('gallery-thumbs');
+            thumbsContainer.innerHTML = ''; 
+            currentModalImages = []; 
+
+            if(item.ImageURL && item.ImageURL.trim() !== "") {
+                currentModalImages = item.ImageURL.split(',').map(url => url.trim()).filter(url => url !== "");
+                
+                currentModalImages.forEach((url, i) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = url;
+                    thumb.className = `w-16 h-16 md:w-20 md:h-20 object-cover rounded-xl border border-gray-100 cursor-pointer opacity-70 hover:opacity-100 transition-all flex-shrink-0 ${(i === 0) ? 'thumb-active' : ''}`;
+                    thumb.onclick = function() { setModalMainImage(url, this); };
+                    thumb.onerror = function() { this.remove(); }; 
+                    thumbsContainer.appendChild(thumb);
+                });
+
+                document.getElementById('modal-image-main').src = currentModalImages[0];
+            } else {
+                document.getElementById('modal-image-main').src = 'https://placehold.co/800x600/e2e8f0/475569?text=PS+PROP';
+                thumbsContainer.innerHTML = `<p class='text-xs text-gray-400 p-2'>ไม่มีรูปภาพเพิ่มเติม</p>`;
+            }
 
             document.getElementById('modal-id').innerText = `ID: ${item.ID}`;
             document.getElementById('modal-title').innerText = item.Title;
             document.getElementById('modal-location').innerText = item.Location;
             document.getElementById('modal-price').innerText = `฿${Number(item.Price).toLocaleString()}`;
-            document.getElementById('modal-desc').innerText = item.Description || "ไม่ได้ระบุรายละเอียดเพิ่มเติม สามารถติดต่อสอบถามผู้ดูแลได้โดยตรงครับ";
-            document.getElementById('modal-agent').innerText = item.Agent || "ทีมงาน PS PROP";
-            document.getElementById('modal-image').src = item.ImageURL || 'https://placehold.co/800x600/e2e8f0/475569?text=No+Image';
+            document.getElementById('modal-desc').innerText = item.Description || "ไม่ได้ระบุรายละเอียดเพิ่มเติม สามารถทักแชทสอบถามเจ้าของห้องได้โดยตรงเลยครับ";
             
             const contactBtn = document.getElementById('modal-contact-btn');
-            if(item.ContactLink) {
+            if(item.ContactLink && item.ContactLink.trim() !== "") {
                 contactBtn.href = item.ContactLink;
                 contactBtn.style.display = 'flex';
-            } else {
-                contactBtn.style.display = 'none';
-            }
+            } else { contactBtn.style.display = 'none'; }
 
             const statusEl = document.getElementById('modal-status');
             statusEl.innerText = item.Status || 'ใช้งานอยู่';
             statusEl.className = `text-xs font-bold px-3 py-1 rounded-full text-white ${item.Status === 'ใช้งานอยู่' ? 'bg-green-500' : 'bg-red-500'}`;
 
-            // แสดง Modal
             document.getElementById('property-modal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // ล็อกพื้นหลังไม่ให้เลื่อน
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal() {
             document.getElementById('property-modal').classList.remove('active');
-            document.body.style.overflow = 'auto'; // คืนค่าพื้นหลัง
+            document.body.style.overflow = 'auto'; 
         }
 
-        // ปิด Modal เมื่อคลิกพื้นที่ว่าง
         document.getElementById('property-modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
 
-        // เริ่มต้นโหลดข้อมูล
+        function zoomImage() {
+            const currentLargeSrc = document.getElementById('modal-image-main').src;
+            if(!currentLargeSrc || currentLargeSrc.includes('placehold.co')) return; 
+
+            document.getElementById('modal-zoom-image').src = currentLargeSrc;
+            const overlay = document.getElementById('image-zoom-overlay');
+            overlay.classList.add('active'); 
+            overlay.style.visibility = 'visible';
+            overlay.style.opacity = '1';
+            overlay.querySelector('img').style.transform = 'scale(1)'; 
+        }
+
+        function closeZoom() {
+            const overlay = document.getElementById('image-zoom-overlay');
+            overlay.style.visibility = 'hidden';
+            overlay.style.opacity = '0';
+            overlay.querySelector('img').style.transform = 'scale(0.95)'; 
+        }
+
         fetchProperties();
     </script>
 </body>
