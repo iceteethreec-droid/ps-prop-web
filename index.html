@@ -3,71 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS PROP | คอนโดชลบุรี บางแสน ศรีราชา</title>
+    <title>PS PROP | ซื้อ-ขาย-ปล่อยเช่า คอนโด บ้าน ที่ดิน ชลบุรี</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Prompt', sans-serif; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f3f4f6; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .filter-btn.active { background-color: #1e3a8a; color: white; border-color: #1e3a8a; }
+    </style>
 </head>
-<body class="bg-slate-50">
-    <nav class="bg-blue-900 text-white p-4 shadow-lg sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold italic">PS PROP</h1>
-            <div class="space-x-4">
-                <a href="#" class="hover:text-blue-300">หน้าแรก</a>
+<body>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-building text-blue-800 text-3xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-900 tracking-wider">PS<span class="text-blue-800">PROP</span></h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-blue-800 font-medium transition">หน้าแรก</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-800 font-medium transition">ฝากขาย/ปล่อยเช่า</a>
+                    <a href="#" class="bg-blue-800 text-white px-6 py-2 rounded-full font-medium hover:bg-blue-900 transition shadow-lg">ติดต่อเรา</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="bg-blue-800 text-white py-12 text-center">
-        <h2 class="text-3xl font-bold mb-2">ปล่อยเช่าคอนโด ชลบุรี บางแสน ศรีราชา</h2>
-        <p class="opacity-80">จัดการห้องพักง่ายๆ ผ่าน Google Sheets</p>
+    <header class="hero-bg text-white py-24 text-center px-4">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">ค้นหาอสังหาฯ ที่ใช่ ในโซนชลบุรี</h2>
+        <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">รวบรวม คอนโด บ้าน และที่ดิน ทำเลสวย บางแสน ศรีราชา พัทยา อัปเดตล่าสุดพร้อมเข้าอยู่</p>
+        
+        <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto bg-white/10 p-2 rounded-2xl backdrop-blur-sm">
+            <button onclick="filterItems('ทั้งหมด')" class="filter-btn active px-6 py-2 rounded-xl bg-white text-gray-800 font-medium border border-gray-200 hover:bg-gray-50 transition">ทั้งหมด</button>
+            <button onclick="filterItems('คอนโด')" class="filter-btn px-6 py-2 rounded-xl bg-white text-gray-800 font-medium border border-gray-200 hover:bg-gray-50 transition">🏢 คอนโด</button>
+            <button onclick="filterItems('บ้าน')" class="filter-btn px-6 py-2 rounded-xl bg-white text-gray-800 font-medium border border-gray-200 hover:bg-gray-50 transition">🏡 บ้าน</button>
+            <button onclick="filterItems('ที่ดิน')" class="filter-btn px-6 py-2 rounded-xl bg-white text-gray-800 font-medium border border-gray-200 hover:bg-gray-50 transition">🗺️ ที่ดิน</button>
+        </div>
     </header>
 
-    <main class="max-w-6xl mx-auto p-6">
-        <div id="loading" class="text-center py-10 text-gray-500 text-xl">กำลังดึงข้อมูลห้องว่างล่าสุด...</div>
-        <div id="app" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-end mb-8 border-b border-gray-200 pb-4">
+            <h3 class="text-2xl font-bold text-gray-800">รายการทรัพย์ล่าสุด</h3>
+            <p class="text-gray-500 text-sm">อัปเดตเรียลไทม์</p>
+        </div>
+
+        <div id="loading" class="flex flex-col items-center justify-center py-20">
+            <i class="fa-solid fa-spinner fa-spin text-4xl text-blue-800 mb-4"></i>
+            <p class="text-gray-500 text-lg">กำลังดึงข้อมูลจากระบบ...</p>
+        </div>
+        
+        <div id="app" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
     </main>
 
     <script>
         // ลิงก์ API ของคุณไอซ์
         const API_URL = "https://script.google.com/macros/s/AKfycbx3Yc-4IIRyPeILtuBtZcykN1kvnwfsApFYmj3GgDlWnN84ThEJmnJFsPe8EjNiOw2t/exec";
+        let allProperties = []; // เก็บข้อมูลทั้งหมดไว้ทำ Filter
 
         async function loadCondos() {
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
-                render(data);
+                
+                // กรองเอาแถวที่ว่างๆ ออกไป (เผื่อพิมพ์เว้นบรรทัดใน Sheet)
+                allProperties = data.filter(item => item.Title && item.Title.trim() !== ""); 
+                
+                render(allProperties);
                 document.getElementById('loading').classList.add('hidden');
             } catch (error) {
                 console.error("Error:", error);
-                document.getElementById('loading').innerText = "รออัปเดตข้อมูลจากระบบหลังบ้าน...";
+                document.getElementById('loading').innerHTML = "<p class='text-red-500 text-xl'><i class='fa-solid fa-triangle-exclamation'></i> ไม่สามารถดึงข้อมูลได้ โปรดตรวจสอบลิงก์ API</p>";
+            }
+        }
+
+        function filterItems(category) {
+            // สลับคลาสปุ่ม Active
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active', 'bg-blue-800', 'text-white'));
+            event.currentTarget.classList.add('active', 'bg-blue-800', 'text-white');
+
+            if (category === 'ทั้งหมด') {
+                render(allProperties);
+            } else {
+                const filtered = allProperties.filter(item => item.Category === category);
+                render(filtered);
             }
         }
 
         function render(items) {
             const container = document.getElementById('app');
             if (items.length === 0) {
-                document.getElementById('loading').innerText = "ยังไม่มีรายการห้องว่างในขณะนี้";
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500"><i class="fa-regular fa-folder-open text-4xl mb-3 block"></i>ไม่พบรายการในหมวดหมู่นี้</div>`;
                 return;
             }
             container.innerHTML = items.map(item => `
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
-                    <img src="${item.ImageURL}" class="w-full h-52 object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=PS+PROP'">
-                    <div class="p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded">${item.ID || 'CONDO'}</span>
-                            <span class="text-xs font-bold ${item.Status === 'ใช้งานอยู่' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'} px-2 py-1 rounded-full">${item.Status || 'ว่าง'}</span>
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group">
+                    <div class="relative overflow-hidden">
+                        <img src="${item.ImageURL || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80'}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80'">
+                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-blue-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">
+                            <i class="fa-solid fa-hashtag mr-1"></i>${item.ID || '-'}
                         </div>
-                        <h3 class="text-lg font-semibold mb-1">${item.Title}</h3>
-                        <p class="text-gray-500 text-sm mb-4">📍 ${item.Location}</p>
-                        <div class="flex justify-between items-center border-t pt-4">
-                            <span class="text-xl font-bold text-blue-600">฿${Number(item.Price).toLocaleString()} <small class="text-gray-400 text-xs">/เดือน</small></span>
-                            <span class="text-sm text-gray-500">${item.Agent || 'PS PROP'}</span>
+                        <div class="absolute top-3 right-3 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm ${item.Status === 'ใช้งานอยู่' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}">
+                            ${item.Status || 'ว่าง'}
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 pt-12">
+                            <span class="text-white text-xs bg-blue-600/80 px-2 py-1 rounded">${item.Category || 'อสังหาฯ'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-1" title="${item.Title}">${item.Title}</h3>
+                        <p class="text-gray-500 text-sm mb-4"><i class="fa-solid fa-location-dot text-red-500 mr-2"></i>${item.Location}</p>
+                        
+                        <div class="text-2xl font-bold text-blue-800 mb-4">
+                            ฿${Number(item.Price).toLocaleString()} <span class="text-sm font-normal text-gray-500">/ เดือน</span>
+                        </div>
+                        
+                        <div class="border-t border-gray-100 pt-4 flex justify-between items-center">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 mr-2">
+                                    <i class="fa-regular fa-user"></i>
+                                </div>
+                                <span>${item.Agent || 'ทีมงาน PS PROP'}</span>
+                            </div>
+                            <button class="text-blue-800 hover:text-blue-600 font-medium text-sm">
+                                รายละเอียด <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
+        
         loadCondos();
     </script>
 </body>
